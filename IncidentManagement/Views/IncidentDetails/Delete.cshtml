@@ -1,0 +1,96 @@
+﻿@model IncidentManagement.Models.IncidentDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <br /><br /><br /><br />
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Severity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Severity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentCreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentCreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentAnalysisStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentAnalysisStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentClosedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentClosedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="@IncidentManagement.Resource.Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

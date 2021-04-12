@@ -1,0 +1,90 @@
+﻿@model IncidentManagement.Models.IncidentDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IncidentDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Severity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Severity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentCreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentCreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentAnalysisStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentAnalysisStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentClosedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentClosedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

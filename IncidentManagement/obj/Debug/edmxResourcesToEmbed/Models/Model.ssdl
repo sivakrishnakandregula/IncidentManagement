@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IncidentMonitoringModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="IncidentDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ApplicationID" Type="int" />
+    <Property Name="IncidentID" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Severity" Type="int" />
+    <Property Name="Priority" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="IncidentCreateDate" Type="varchar" MaxLength="50" />
+    <Property Name="IncidentAnalysisStartDate" Type="varchar" MaxLength="50" />
+    <Property Name="IncidentClosedOn" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SupportApplication">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ApplicationName" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="1000" />
+    <Property Name="OperatingSystem" Type="varchar" MaxLength="10" />
+    <Property Name="LastUpdate" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="20" />
+    <Property Name="Password" Type="varchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsAdmin" Type="bit" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="20" />
+    <Property Name="CreatedDate" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_IncidentDetails_ApplicationID">
+    <End Role="SupportApplication" Type="Self.SupportApplication" Multiplicity="0..1" />
+    <End Role="IncidentDetails" Type="Self.IncidentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupportApplication">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IncidentDetails">
+        <PropertyRef Name="ApplicationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IncidentMonitoringModelStoreContainer">
+    <EntitySet Name="IncidentDetails" EntityType="Self.IncidentDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupportApplication" EntityType="Self.SupportApplication" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_IncidentDetails_ApplicationID" Association="Self.FK_IncidentDetails_ApplicationID">
+      <End Role="SupportApplication" EntitySet="SupportApplication" />
+      <End Role="IncidentDetails" EntitySet="IncidentDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

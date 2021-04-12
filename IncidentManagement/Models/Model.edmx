@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IncidentMonitoringModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="IncidentDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ApplicationID" Type="int" />
+          <Property Name="IncidentID" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Severity" Type="int" />
+          <Property Name="Priority" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="IncidentCreateDate" Type="varchar" MaxLength="50" />
+          <Property Name="IncidentAnalysisStartDate" Type="varchar" MaxLength="50" />
+          <Property Name="IncidentClosedOn" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SupportApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ApplicationName" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="OperatingSystem" Type="varchar" MaxLength="10" />
+          <Property Name="LastUpdate" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsAdmin" Type="bit" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" />
+          <Property Name="CreatedDate" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_IncidentDetails_ApplicationID">
+          <End Role="SupportApplication" Type="Self.SupportApplication" Multiplicity="0..1" />
+          <End Role="IncidentDetails" Type="Self.IncidentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupportApplication">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IncidentDetails">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IncidentMonitoringModelStoreContainer">
+          <EntitySet Name="IncidentDetails" EntityType="Self.IncidentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupportApplication" EntityType="Self.SupportApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_IncidentDetails_ApplicationID" Association="Self.FK_IncidentDetails_ApplicationID">
+            <End Role="SupportApplication" EntitySet="SupportApplication" />
+            <End Role="IncidentDetails" EntitySet="IncidentDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IncidentMonitoringModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="IncidentDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationID" Type="Int32" />
+          <Property Name="IncidentID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Severity" Type="Int32" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentCreateDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentAnalysisStartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentClosedOn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SupportApplication" Relationship="Self.FK_IncidentDetails_ApplicationID" FromRole="IncidentDetails" ToRole="SupportApplication" />
+        </EntityType>
+        <EntityType Name="SupportApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="OperatingSystem" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IncidentDetails" Relationship="Self.FK_IncidentDetails_ApplicationID" FromRole="SupportApplication" ToRole="IncidentDetails" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsAdmin" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_IncidentDetails_ApplicationID">
+          <End Role="SupportApplication" Type="Self.SupportApplication" Multiplicity="0..1" />
+          <End Role="IncidentDetails" Type="Self.IncidentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupportApplication">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IncidentDetails">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IncidentContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="IncidentDetails" EntityType="Self.IncidentDetail" />
+          <EntitySet Name="SupportApplications" EntityType="Self.SupportApplication" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_IncidentDetails_ApplicationID" Association="Self.FK_IncidentDetails_ApplicationID">
+            <End Role="SupportApplication" EntitySet="SupportApplications" />
+            <End Role="IncidentDetails" EntitySet="IncidentDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IncidentMonitoringModelStoreContainer" CdmEntityContainer="IncidentContext">
+          <EntitySetMapping Name="IncidentDetails">
+            <EntityTypeMapping TypeName="IncidentMonitoringModel.IncidentDetail">
+              <MappingFragment StoreEntitySet="IncidentDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Severity" ColumnName="Severity" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IncidentCreateDate" ColumnName="IncidentCreateDate" />
+                <ScalarProperty Name="IncidentAnalysisStartDate" ColumnName="IncidentAnalysisStartDate" />
+                <ScalarProperty Name="IncidentClosedOn" ColumnName="IncidentClosedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupportApplications">
+            <EntityTypeMapping TypeName="IncidentMonitoringModel.SupportApplication">
+              <MappingFragment StoreEntitySet="SupportApplication">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OperatingSystem" ColumnName="OperatingSystem" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="IncidentMonitoringModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

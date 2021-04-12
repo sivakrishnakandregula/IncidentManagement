@@ -1,0 +1,102 @@
+﻿/*body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}*/
+
+/* Set padding to keep content from hitting the edges */
+/*.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}*/
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+/*.dl-horizontal dt {
+    white-space: normal;
+}*/
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/*Dropdown menu css*/
+
+/*body {
+    font-family: ;
+    outline: none;
+}*/
+
+.navbar-inverse {
+    background-color: #2a84eb;
+    border-color: transparent;
+
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    font-size: 30px;
+    margin-right: 40px;
+
+}
+#myNavbar .navbar-nav li a {
+    color: #fff;
+    font-size: 19px;
+}
+
+#myNavbar #incident #user #logout {
+    transition: all 0.3s ease-in-out;
+}
+#myNavbar #incident:hover #user:hover {
+    background-color: #0751a6;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f0f0f0;
+    box-shadow: 2px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+#sub-dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f0f0f0;
+    margin-left: 186px;
+    margin-top: -26px;
+   
+}
+#myNavbar .navbar-nav li a {
+    color: #fff;
+    font-size: 14px;
+}
+
+element {
+    margin-left: 600px;
+}
+.navbar-nav {
+    float: unset;
+    margin: 0;
+    width: 112%;
+}
+.navbar-nav {
+    float: unset;
+    margin: 0px;
+    height: none;
+}
+#sub-dropdown-menu a , .dropdown-menu a {
+    color: #000 !important;
+    font-size: 16px !important
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    transition: all 0.5s ease-in-out;
+}
+
+.dropdown .dropdown-menu  a:hover{
+    background-color: #c9c7c7;
+}
+#sub-dropdown:hover #sub-dropdown-menu{ display: block;} 

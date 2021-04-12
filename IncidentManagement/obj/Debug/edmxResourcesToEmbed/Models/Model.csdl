@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IncidentMonitoringModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="IncidentDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ApplicationID" Type="Int32" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Severity" Type="Int32" />
+    <Property Name="Priority" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentCreateDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentAnalysisStartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IncidentClosedOn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SupportApplication" Relationship="Self.FK_IncidentDetails_ApplicationID" FromRole="IncidentDetails" ToRole="SupportApplication" />
+  </EntityType>
+  <EntityType Name="SupportApplication">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ApplicationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="OperatingSystem" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IncidentDetails" Relationship="Self.FK_IncidentDetails_ApplicationID" FromRole="SupportApplication" ToRole="IncidentDetails" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsAdmin" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IncidentDetails_ApplicationID">
+    <End Role="SupportApplication" Type="Self.SupportApplication" Multiplicity="0..1" />
+    <End Role="IncidentDetails" Type="Self.IncidentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupportApplication">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IncidentDetails">
+        <PropertyRef Name="ApplicationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IncidentContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="IncidentDetails" EntityType="Self.IncidentDetail" />
+    <EntitySet Name="SupportApplications" EntityType="Self.SupportApplication" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_IncidentDetails_ApplicationID" Association="Self.FK_IncidentDetails_ApplicationID">
+      <End Role="SupportApplication" EntitySet="SupportApplications" />
+      <End Role="IncidentDetails" EntitySet="IncidentDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
